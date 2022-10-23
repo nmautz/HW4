@@ -271,6 +271,14 @@
                 const selectedButton = e.target
                 const correct = selectedButton.dataset.correct
 
+                if(correct && remove_correct){
+                    console.log(questions)
+                    questions.splice(currentQuestionIndex, 1)
+                    console.log(questions)
+                    currentQuestionIndex--
+
+                }
+
 
                 show_more_info(more_info_save)
                 setStatusClass(document.body, correct)
@@ -302,7 +310,10 @@
                 element.classList.remove('wrong')
             }
 
-            const questions = [
+
+            let correct_questions =[]
+
+            let questions = [
                 {
                     question: 'What is the fastest animal?',
                     answers: [

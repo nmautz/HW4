@@ -135,7 +135,7 @@
                 setNextQuestion()
             })
             prevButton.addEventListener('click', () => {
-                if(currentQuestionIndex-1 > 0){
+                if(currentQuestionIndex > 0){
                     currentQuestionIndex--
                 }
                 setNextQuestion()
@@ -256,6 +256,17 @@
                         { text: 'Incorrect Answer', correct: false },
                         { text: 'Incorrect Answer', correct: false },
                         { text: 'Incorrect Answer', correct: false },
+                        { text: 'Incorrect Answer', correct: false },
+                        { text: 'Incorrect Answer', correct: false },
+                    ]
+                },
+                {
+                    question: 'This is another third question',
+                    answers: [
+                        { text: 'Correct Answer', correct: false },
+                        { text: 'Incorrect Answer', correct: false },
+                        { text: 'Incorrect Answer', correct: false },
+                        { text: 'Incorrect Answer:)', correct: true },
                         { text: 'Incorrect Answer', correct: false },
                         { text: 'Incorrect Answer', correct: false },
                     ]

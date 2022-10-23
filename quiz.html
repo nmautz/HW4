@@ -26,6 +26,7 @@
             margin: 0;
             display: flex;
             width: 100vw;
+            flex-direction: column;
             height: 100vh;
             justify-content: center;
             align-items: center;
@@ -95,6 +96,20 @@
         .hide {
             display: none;
         }
+
+        #more-info-container{
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 800px;
+            height: 100px;
+            background-color: red;
+            z-index: 100;
+        }
+
+        #more-info-text{
+            text-align: center;
+        }
     </style>
     <script>
 
@@ -117,6 +132,25 @@
                 setNextQuestion()
             })
 
+
+            function show_more_info(text){
+                const container = document.createElement("div")
+                container.id = "more-info-container"
+                
+                const p = document.createElement("p")
+                p.id = "more-info-text"
+                p.innerHTML = text 
+
+                container.appendChild(p)
+                document.getElementById("more-info").appendChild(container)
+            }
+
+            function hide_more_info(){
+                const del = document.getElementById("more-info-container")
+                document.getElementById("more-info").removeChild(del)
+                
+            }
+
             function startGame() {
                 startButton.classList.add('hide')
                 shuffledQuestions = questions.sort(() => Math.random() - .5)
@@ -128,6 +162,7 @@
             function setNextQuestion() {
                 resetState()
                 showQuestion(shuffledQuestions[currentQuestionIndex])
+                hide_more_info()
             }
 
             function showQuestion(question) {
@@ -155,6 +190,8 @@
             function selectAnswer(e) {
                 const selectedButton = e.target
                 const correct = selectedButton.dataset.correct
+                show_more_info()
+
                 setStatusClass(document.body, correct)
                 Array.from(answerButtonsElement.children).forEach(button => {
                     setStatusClass(button, button.dataset.correct)
@@ -207,6 +244,10 @@
 </head>
 
 <body>
+    <div id="more-info">
+
+    </div>
+
     <div class="container">
         <div id="question-container" class="hide">
             <div id="question">Question</div>

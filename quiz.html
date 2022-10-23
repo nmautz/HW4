@@ -133,11 +133,42 @@
             const questionElement = document.getElementById('question')
             const answerButtonsElement = document.getElementById('answer-buttons')
             const prevButton = document.getElementById('prev-btn')
+            const shuffle_check = document.getElementById('shuffle-check')
+            const timed_check = document.getElementById('timed-check')
+            const remcor_check = document.getElementById('remcor-check')
+
+
+
 
             let more_info_save = null
-            let shuffle_cards = true
+            let shuffle_cards = false
             let timed_session = false
             let remove_correct = false
+
+
+
+            shuffle_check.addEventListener("click",()=>{
+                if(shuffle_check.checked){
+                    shuffle_cards = true
+                }else{
+                    shuffle_cards = false
+                }
+            })
+            timed_check.addEventListener("click",()=>{
+                if(timed_check.checked){
+                    timed_session = true
+                }else{
+                    timed_session = false
+                }
+            })
+
+            remcor_check.addEventListener("click",()=>{
+                if(remcor_check.checked){
+                    remove_correct = true
+                }else{
+                    remove_correct = false
+                }
+            })
 
 
             let shuffledQuestions, currentQuestionIndex
@@ -335,15 +366,15 @@
         <div id="options">
             <div class="option">
                 <p>Shuffle Cards</p>
-                <input type="checkbox">
+                <input id="shuffle-check" type="checkbox">
             </div>
             <div class="option">
                 <p>Timed Session</p>
-                <input type="checkbox">
+                <input id="timed-check" type="checkbox">
             </div>
             <div class="option">
                 <p>Remove Correct from Deck</p>
-                <input type="checkbox">
+                <input id="remcor-check" type="checkbox">
             </div>
 
 

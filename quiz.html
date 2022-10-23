@@ -134,23 +134,39 @@
                 currentQuestionIndex++
                 setNextQuestion()
             })
+            prevButton.addEventListener('click', () => {
+                if(currentQuestionIndex-1 > 0){
+                    currentQuestionIndex--
+                }
+                setNextQuestion()
+            })
 
 
             function show_more_info(text){
-                const container = document.createElement("div")
-                container.id = "more-info-container"
-                
-                const p = document.createElement("p")
-                p.id = "more-info-text"
-                p.innerHTML = text 
 
-                container.appendChild(p)
-                document.getElementById("more-info").appendChild(container)
+                const old = document.getElementById("more-info-container")
+
+
+                if(old == undefined){
+                    const container = document.createElement("div")
+                    container.id = "more-info-container"
+                    
+                    const p = document.createElement("p")
+                    p.id = "more-info-text"
+                    p.innerHTML = text 
+
+                    container.appendChild(p)
+                    document.getElementById("more-info").appendChild(container)
+                }
+ 
             }
 
             function hide_more_info(){
+
                 const del = document.getElementById("more-info-container")
-                document.getElementById("more-info").removeChild(del)
+                if(del != undefined){
+                    document.getElementById("more-info").removeChild(del)
+                }
                 
             }
 

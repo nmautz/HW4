@@ -126,6 +126,8 @@
             const answerButtonsElement = document.getElementById('answer-buttons')
             const prevButton = document.getElementById('prev-btn')
 
+            let more_info_save = null
+
             let shuffledQuestions, currentQuestionIndex
             //using the domLoaded function because the buttons need to be rendered before we can
             //add an event listener
@@ -185,6 +187,9 @@
             }
 
             function showQuestion(question) {
+
+                more_info_save = question.info
+
                 questionElement.innerText = question.question
                 question.answers.forEach(answer => {
                     const button = document.createElement('button')
@@ -210,8 +215,9 @@
             function selectAnswer(e) {
                 const selectedButton = e.target
                 const correct = selectedButton.dataset.correct
-                show_more_info()
 
+
+                show_more_info(more_info_save)
                 setStatusClass(document.body, correct)
                 Array.from(answerButtonsElement.children).forEach(button => {
                     setStatusClass(button, button.dataset.correct)
@@ -243,33 +249,32 @@
 
             const questions = [
                 {
-                    question: 'This is a test question',
+                    question: 'What is the fastest animal?',
                     answers: [
-                        { text: 'Correct Answer', correct: true },
-                        { text: 'Incorrect Answer', correct: false },
-                    ]
+                        { text: 'Cheetah', correct: true },
+                        { text: 'Snail', correct: false },
+                        { text: 'Shark', correct: false },
+                        { text: 'Car', correct: false },
+                    ], 
+                    info: "The Cheetah is capable of going from 0 to 60 miles per hour in less than three second",
                 },
                 {
-                    question: 'This is another test question',
+                    question: 'How do you spell',
                     answers: [
-                        { text: 'Correct Answer', correct: true },
-                        { text: 'Incorrect Answer', correct: false },
-                        { text: 'Incorrect Answer', correct: false },
-                        { text: 'Incorrect Answer', correct: false },
-                        { text: 'Incorrect Answer', correct: false },
-                        { text: 'Incorrect Answer', correct: false },
-                    ]
+                        { text: 'Acceptible', correct: false },
+                        { text: 'Acceptable', correct: true },
+
+                    ],
+                    info: "Do you think this website is acceptable?"
                 },
                 {
-                    question: 'This is another third question',
+                    question: 'The McChicken is served at?',
                     answers: [
-                        { text: 'Correct Answer', correct: false },
-                        { text: 'Incorrect Answer', correct: false },
-                        { text: 'Incorrect Answer', correct: false },
-                        { text: 'Incorrect Answer:)', correct: true },
-                        { text: 'Incorrect Answer', correct: false },
-                        { text: 'Incorrect Answer', correct: false },
-                    ]
+                        { text: 'Burger King', correct: false },
+                        { text: 'McDonalds', correct: true },
+
+                    ],
+                    info: "The first McDonalds opened in San Bernardino California, 1955!"
                 },
                 
             ]

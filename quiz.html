@@ -120,6 +120,11 @@
             border: 1px solid black;
             margin-bottom: 5px;
         }
+
+        #time-text{
+            opacity: 0;
+            text-align: center;
+        }
     </style>
     <script>
 
@@ -139,6 +144,7 @@
 
 
 
+            let timerID = undefined
 
             let more_info_save = null
             let shuffle_cards = false
@@ -233,7 +239,48 @@
                     container.removeChild(options)
                 }
 
+
+                if(timed_session){
+                    start_timer();
+                }
+
             }
+
+            function stop_timer(){
+                if(timerID != undefined){
+                    clearInterval(timerID)
+                }
+
+            }
+
+            function start_timer(){
+
+                if(timerID == undefined){
+                    let time_text = document.getElementById("time-text")
+                    let time = 0.0
+                    time_text.innerHTML = time
+                    time_text.style.opacity = '100'
+
+
+                    timerID = setInterval(()=>{
+
+                        let dec = Math.floor(Math.log10(time))
+                        if(dec == -1){dec = 0}
+
+                        time_text.innerHTML = String(time).substring(0,3+dec)
+                        time += 0.1
+
+
+                        
+
+
+                    }, 100)
+                }
+
+
+            }
+
+            
 
             function setNextQuestion() {
                 resetState()
@@ -374,6 +421,7 @@
             </div>
         </div>
 
+        <p id="time-text">TIME TEXT</p>
         <div id="options">
             <div class="option">
                 <p>Shuffle Cards</p>

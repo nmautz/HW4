@@ -103,7 +103,9 @@
             justify-content: center;
             width: 800px;
             height: 100px;
-            background-color: red;
+            background-color: rgb(199, 232, 34);
+            border: 5px black dotted;
+            border-radius: 25px;
             z-index: 100;
         }
 
@@ -122,6 +124,7 @@
             const questionContainerElement = document.getElementById('question-container')
             const questionElement = document.getElementById('question')
             const answerButtonsElement = document.getElementById('answer-buttons')
+            const prevButton = document.getElementById('prev-btn')
 
             let shuffledQuestions, currentQuestionIndex
             //using the domLoaded function because the buttons need to be rendered before we can
@@ -182,6 +185,7 @@
             function resetState() {
                 clearStatusClass(document.body)
                 nextButton.classList.add('hide')
+                prevButton.classList.add('hide')
                 while (answerButtonsElement.firstChild) {
                     answerButtonsElement.removeChild(answerButtonsElement.firstChild)
                 }
@@ -198,6 +202,9 @@
                 })
                 if (shuffledQuestions.length > currentQuestionIndex + 1) {
                     nextButton.classList.remove('hide')
+                    prevButton.classList.remove('hide')
+
+                    //Prev btn TODO
                 } else {
                     startButton.innerText = 'Restart'
                     startButton.classList.remove('hide')
@@ -260,6 +267,8 @@
         </div>
         <div class="controls">
             <button id="start-btn" class="start-btn btn">Start</button>
+            <button id="prev-btn" class="next-btn btn hide">Back</button>
+
             <button id="next-btn" class="next-btn btn hide">Next</button>
         </div>
     </div>

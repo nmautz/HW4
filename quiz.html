@@ -257,7 +257,7 @@
 
                 if(timerID == undefined){
                     let time_text = document.getElementById("time-text")
-                    let time = 0.0
+                    let time = 0
                     time_text.innerHTML = time
                     time_text.style.opacity = '100'
 
@@ -267,8 +267,15 @@
                         let dec = Math.floor(Math.log10(time))
                         if(dec == -1){dec = 0}
 
-                        time_text.innerHTML = String(time).substring(0,3+dec)
-                        time += 0.1
+                        let display_time = time/10
+
+                        if(time%300 == 0 && time!=0){
+                            flash_display()
+                        }
+
+                        time_text.innerHTML = String(display_time).substring(0,3+dec)
+                        time += 1
+
 
 
                         
@@ -280,7 +287,45 @@
 
             }
 
-            
+            function flash_display(){
+
+                let elems = document.getElementsByClassName("flash")
+
+                let setAll = (state, elems)=>{
+                    let color = 'unset'
+
+                    if(state){
+                        color = 'red'
+
+                    }
+                    
+                    for(let elem of elems){
+                        elem.style.backgroundColor = color
+                    }
+
+                }
+
+                setAll(1,elems)
+
+                setTimeout(()=>{
+                    setAll(0, elems)
+                    setTimeout(()=>{
+                        setAll(1,elems)
+
+                        setTimeout(()=>{
+                            setAll(0, elems)
+
+
+
+
+                        },1000)
+
+
+                    },1000)
+
+
+                },1000)
+            }
 
             function setNextQuestion() {
                 resetState()
@@ -412,7 +457,7 @@
 
     <div id="main-container" class="container">
         <div id="question-container" class="hide">
-            <div id="question">Question</div>
+            <div id="question" class="flash">Question</div>
             <div id="answer-buttons" class="btn-grid">
                 <button class="btn">Answer 1</button>
                 <button class="btn">Answer 2</button>
@@ -421,7 +466,7 @@
             </div>
         </div>
 
-        <p id="time-text">TIME TEXT</p>
+        <p id="time-text" class="flash">TIME TEXT</p>
         <div id="options">
             <div class="option">
                 <p>Shuffle Cards</p>

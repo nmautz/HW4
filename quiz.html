@@ -112,6 +112,14 @@
         #more-info-text{
             text-align: center;
         }
+
+        .option{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border: 1px solid black;
+            margin-bottom: 5px;
+        }
     </style>
     <script>
 
@@ -127,6 +135,10 @@
             const prevButton = document.getElementById('prev-btn')
 
             let more_info_save = null
+            let shuffle_cards = true
+            let timed_session = false
+            let remove_correct = false
+
 
             let shuffledQuestions, currentQuestionIndex
             //using the domLoaded function because the buttons need to be rendered before we can
@@ -174,10 +186,22 @@
 
             function startGame() {
                 startButton.classList.add('hide')
-                shuffledQuestions = questions.sort(() => Math.random() - .5)
+                if(shuffle_cards){
+                    shuffledQuestions = questions.sort(() => Math.random() - .5)
+                }else{
+                    shuffledQuestions = questions
+                }
                 currentQuestionIndex = 0
                 questionContainerElement.classList.remove('hide')
                 setNextQuestion()
+
+
+                let options = document.getElementById("options")
+                let container = document.getElementById("main-container")
+                if(options != null){
+                    container.removeChild(options)
+                }
+
             }
 
             function setNextQuestion() {
@@ -297,7 +321,7 @@
 
     </div>
 
-    <div class="container">
+    <div id="main-container" class="container">
         <div id="question-container" class="hide">
             <div id="question">Question</div>
             <div id="answer-buttons" class="btn-grid">
@@ -307,7 +331,27 @@
                 <button class="btn">Answer 4</button>
             </div>
         </div>
+
+        <div id="options">
+            <div class="option">
+                <p>Shuffle Cards</p>
+                <input type="checkbox">
+            </div>
+            <div class="option">
+                <p>Timed Session</p>
+                <input type="checkbox">
+            </div>
+            <div class="option">
+                <p>Remove Correct from Deck</p>
+                <input type="checkbox">
+            </div>
+
+
+        </div>
         <div class="controls">
+
+
+
             <button id="start-btn" class="start-btn btn">Start</button>
             <button id="prev-btn" class="next-btn btn hide">Back</button>
 
